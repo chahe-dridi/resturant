@@ -29,9 +29,25 @@
     <link href="assets/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/pe-icons.css" rel="stylesheet">
 
+
+  <!-- custom tufo thre js-->  
+    <link rel="stylesheet" type="text/css" href="tufo_text/style_text.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js"></script>
+    <script src="tufo_text/script_text.js"></script>
+
+
+
 </head>
 
+
+
+
+
 <body id="page-top" class="regular-navigation">
+
+
+    
 
 
     <div class="master-wrapper">
@@ -53,6 +69,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+
+
                     <a class="navbar-brand smoothie" href="index.html"> <span class="theme-accent-color">TUFO</span></a>
                 </div>
 
@@ -97,9 +115,11 @@
                     <div class="col-sm-1 pull-left text-center slider-control match-height">
                         <a href="#" class="prev-bs-slide vertical-center wow fadeInLeft" data-wow-delay="0.8s"><i class="fa fa-long-arrow-left"></i></a>
                     </div>
-                    <div class="intro-text text-center smoothie col-sm-10 match-height">                    
-                        <div class="intro-heading wow fadeIn heading-font" data-wow-delay="0.8s"><img src="assets/img/intro-logo.png"></div>              
-                    </div>
+                    <div class="intro-heading wow fadeIn heading-font" data-wow-delay="0.8s">
+                        <img src="assets/img/intro-logo.png" style="width: 300px; vertical-align: bottom; margin-right: 100px;  margin-top: 100px;">
+                         
+                      </div>
+                      
                     <div class="col-sm-1 pull-right text-center slider-control match-height">
                         <a href="#" class="next-bs-slide vertical-center wow fadeInRight" data-wow-delay="0.8s"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
@@ -107,6 +127,8 @@
             </div>
         </header>
 
+
+        
         <section id="about" class="top-border-me">
             <div class="section-inner">
 
@@ -738,7 +760,40 @@
     });
     </script>
 
+
+
+    
+    
+
+
+
 </body>
+
+
+<script type="x-shader/x-vertex" id="vertexshader">
+    attribute float size;
+    attribute vec3 customColor;
+    varying vec3 vColor;
+
+    void main() {
+        vColor = customColor;
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = size * ( 300.0 / -mvPosition.z );
+        gl_Position = projectionMatrix * mvPosition;
+    }
+</script>
+<script type="x-shader/x-fragment" id="fragmentshader">
+    uniform vec3 color;
+    uniform sampler2D pointTexture;
+    varying vec3 vColor;
+
+    void main() {
+        gl_FragColor = vec4( color * vColor, 1.0 );
+        gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
+    }
+</script>
+
+<div id="magic"></div>
 
 
 <!-- Mirrored from technext.github.io/thegrill/index.html?_ga=2.261594441.593670590.1667134661-1581669354.1667134661 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Nov 2022 15:59:52 GMT -->
