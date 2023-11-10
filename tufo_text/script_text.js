@@ -284,7 +284,7 @@ class CreateParticles {
 	createText(){ 
 
 		let thePoints = [];
-
+		let r;
 		let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
 		let geometry = new THREE.ShapeGeometry( shapes );
 		geometry.computeBoundingBox();
@@ -373,7 +373,7 @@ class CreateParticles {
 	}
 
 	visibleWidthAtZDepth( depth, camera ) {
-
+      
 	  const height = this.visibleHeightAtZDepth( depth, camera );
 	  return height * camera.aspect;
 
